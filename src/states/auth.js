@@ -8,17 +8,22 @@ const AuthProvider = ({children}) => {
 
     if (userInStorage) userInStorage = JSON.parse(userInStorage) //if user exists, parse json
 
-    const [user, setUser] = useState(userInStorage || null)
+    let emptyUser = {email: '', token: ''}//empty user template
+    const [user, setUser] = useState(userInStorage || emptyUser)
     
+    const saveUser = (_user) => {
+        localStorage.setItem('user', JSON.stringify(_user))
+        setUser(_user)
+    }
+
     const logout = () => {
         localStorage.removeItem("user");
-        localStorage.removeItem("token");
         setUser(null);
       };
     
 
     return(
-        <AuthContext.Provider value={ { user, setUser, logout } }>
+        <AuthContext.Provider value={ { user, setUser, saveUser, logout } }>
             {children}
         </AuthContext.Provider>
     )

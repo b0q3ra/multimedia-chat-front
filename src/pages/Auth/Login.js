@@ -1,21 +1,27 @@
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../states/auth'
-
+import { useState } from 'react'
 
 const Login = () => {
+    const [ user, setUser ] = useState({email: ''})//local temporary user state
+    const { saveUser } = useAuth()
 
-    const { user, setUser } = useAuth()
 
-    const url = `${process.env.REACT_APP_API_URL}/auth/login`
     const login = async (e) => {//login function
         e.preventDefault()
+        const url = `${process.env.REACT_APP_API_URL}/auth/login`
+
         let response = await axios.post(url, {
             email: user.email,
             password: user.password
         })
 
-        console.log(response.data)
+        if(response.data.status === 'success'){
+            console.log(response.data.data)
+           saveUser(response.data.data)//we save the user in local storage and then upload the data
+        }
+
     }
 
     const setEmail = (e) => {//set email
