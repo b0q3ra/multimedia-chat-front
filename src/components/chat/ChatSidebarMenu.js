@@ -8,19 +8,19 @@ import SearchUsers from './SearchUsers'
 
 import { ChatAltIcon, UsersIcon } from '@heroicons/react/solid'//icons
 
-const ActiveChats = () => {
-  const usersURL = `${process.env.REACT_APP_API_URL}/user/all`//users url
-  const chatsURL = `${process.env.REACT_APP_API_URL}/chat/chats`//chats url
+const ChatSidebarMenu = () => {
 
+  /*SELECT CHATS */
   const [displayChats, setDisplayChats] = useState(false)
 
   const selectChats = () => { setDisplayChats(true) }
   const selectUsers = () => { setDisplayChats(false) }
 
 
+  /*NEW CHAT */
+  const [newChat, setNewChat] = useState({})
 
-
-
+  
 
   return (
     <div className="border-r border-gray-300 lg:col-span-1">
@@ -31,12 +31,12 @@ const ActiveChats = () => {
         <span onClick={selectUsers} className="displayUsers w-full cursor-pointer"><UsersIcon className='w-6 m-auto hover:opacity-30'/></span>
       </div>
 
-      {displayChats && <ListChats />}
-      {!displayChats && <ListUsers />}
+      {displayChats && <ListChats newChat={newChat}/>}
+      {!displayChats && <ListUsers setDisplayChats={setDisplayChats} setNewChat={setNewChat}/>}
 
     </div>
     
   )
 }
 
-export default ActiveChats
+export default ChatSidebarMenu

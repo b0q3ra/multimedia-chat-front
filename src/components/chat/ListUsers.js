@@ -1,14 +1,17 @@
 import axios from "axios"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useAuth } from "../../states/auth"
 import useSwr from 'swr'
 import useAllUsers from "../../hooks/api/use-allusers"
 
-const ListUsers = (props) => {
+const ListUsers = ({setNewChat, setDisplayChats}) => {
 
     const [listOfUsers, errorFetchingUsers, mutateUsers] = useAllUsers()
-    
 
+    const createNewChat = (userOfTheNewChat) => { 
+        setNewChat(userOfTheNewChat) //send user to ListChats component
+        setDisplayChats(true) //render ListChats component and un-render ListUsers component
+    }
     
 
     return(
@@ -17,7 +20,7 @@ const ListUsers = (props) => {
 
           {listOfUsers && listOfUsers.map((element, index) => {
             return (
-              <li key={index}>
+              <li onClick={()=>createNewChat(element)} key={index}>
                 <a
                   className="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer hover:bg-gray-100 focus:outline-none">
                   <img className="object-cover w-10 h-10 rounded-full"
@@ -25,9 +28,9 @@ const ListUsers = (props) => {
                   <div className="w-full pb-2">
                     <div className="flex justify-between">
                       <span className="block ml-2 font-semibold text-gray-600">{element.email}</span>
-                      <span className="block ml-2 text-sm text-gray-600">time</span>
+                      <span className="block ml-2 text-sm text-gray-600"></span>
                     </div>
-                    <span className="block ml-2 text-sm text-gray-600">last message</span>
+                    <span className="block ml-2 text-sm text-gray-600"></span>
                   </div>
                 </a>
               </li>

@@ -1,9 +1,11 @@
 import { useState } from "react"
 
-const ListChats = (props) => {
+const ListChats = ({newChat}) => {
 
+    const chatsURL = `${process.env.REACT_APP_API_URL}/chat/chats`//chats url
     const [listOfChats, setListOfChats] = useState([])//list containing our chats
-
+    
+    console.log(newChat)
 
 
 
