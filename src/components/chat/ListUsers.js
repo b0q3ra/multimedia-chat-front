@@ -1,6 +1,16 @@
+import axios from "axios"
+import { useState } from "react"
+import { useAuth } from "../../states/auth"
+import useSwr from 'swr'
+import useAllUsers from "../../hooks/api/use-allusers"
 
-const ListUsers = ({listOfUsers}) => {
+const ListUsers = (props) => {
+
+    const [listOfUsers, errorFetchingUsers, mutateUsers] = useAllUsers()
     
+
+    
+
     return(
         <ul className="overflow-auto h-[32rem]">
         <h2 className="my-2 mb-2 ml-2 text-lg text-gray-600">Users</h2>

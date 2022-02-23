@@ -1,6 +1,14 @@
+import { useState } from "react"
 
-const ListChats = ({listOfChats}) => {
-    
+const ListChats = (props) => {
+
+    const [listOfChats, setListOfChats] = useState([])//list containing our chats
+
+
+
+
+
+
     return(
         <ul className="overflow-auto h-[32rem]">
         <h2 className="my-2 mb-2 ml-2 text-lg text-gray-600">Chats</h2>

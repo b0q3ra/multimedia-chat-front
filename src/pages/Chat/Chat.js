@@ -1,6 +1,6 @@
 import axios from "axios";
-import ActiveChats from "../../components/ActiveChats";
-import ChatBox from "../../components/ChatBox";
+import ActiveChats from "../../components/chat/ChatSidebarMenu";
+import ChatBox from "../../components/chat/ChatBox";
 
 const Chat = () => {
 
@@ -9,7 +9,6 @@ const Chat = () => {
             <div className="container mx-auto flex justify-center">
                 <ActiveChats />
                 <ChatBox />
-
             </div>
         </div>
     )
