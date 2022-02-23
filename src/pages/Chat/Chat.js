@@ -1,5 +1,5 @@
 import axios from "axios";
-import ActiveUsers from "../../components/ActiveUsers";
+import ActiveChats from "../../components/ActiveChats";
 import ChatBox from "../../components/ChatBox";
 
 const Chat = () => {
@@ -7,7 +7,7 @@ const Chat = () => {
     return (
         <div>
             <div className="container mx-auto flex justify-center">
-                <ActiveUsers />
+                <ActiveChats />
                 <ChatBox />
 
             </div>

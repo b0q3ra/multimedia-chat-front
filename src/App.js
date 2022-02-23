@@ -14,13 +14,13 @@ function App() {
           <Routes>
 
             {/*Login Route */}
-            <Route path='/login' element={user?.token ? <Navigate to='/chat'/> : <Login />}/>
+            <Route path='/login' element={ user?.token ? <Navigate to='/chat'/> : <Login /> }/>
 
             {/*Register Route */}
-            <Route path='/register' element={user?.email ? <Navigate to='/login'/> : <Register />}/>
+            <Route path='/register' element={ user?.email ? <Navigate to='/login'/> : <Register /> }/>
 
             {/*Default Route */}
-            <Route path='/chat' element={<Chat />}/>
+            <Route path='/chat' element={ user?.token ? <Chat /> : <Navigate to='/login' /> }/>
 
           </Routes>
         </BrowserRouter>
