@@ -1,13 +1,24 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { mutate } from "swr"
+import useAllChats from "../../hooks/api/use-allchats"
+import { useAuth } from "../../states/auth"
+import { io } from "socket.io-client";
 
 const ListChats = ({newChat}) => {
+    const { user } = useAuth()
 
-    const chatsURL = `${process.env.REACT_APP_API_URL}/chat/chats`//chats url
-    const [listOfChats, setListOfChats] = useState([])//list containing our chats
+
+    /*FETCH CHATS */
+    const [listOfChats, errorFetchingChats, mutateChats, postNewChat] = useAllChats()
     
-    console.log(newChat)
 
+    /*CREATE NEW CHAT */
+    useEffect(() => {
 
+      postNewChat(user._id, newChat._id)
+    }, []);
+
+    /*ADD SOCKETS TO CHAT */
 
 
 
@@ -15,7 +26,7 @@ const ListChats = ({newChat}) => {
         <ul className="overflow-auto h-[32rem]">
         <h2 className="my-2 mb-2 ml-2 text-lg text-gray-600">Chats</h2>
 
-          {listOfChats && listOfChats.map((element, index) => {
+          {Array.isArray(listOfChats) && listOfChats.map((element, index) => {
             return (
               <li key={index}>
                 <a
@@ -24,7 +35,11 @@ const ListChats = ({newChat}) => {
                     src="https://d1bvpoagx8hqbg.cloudfront.net/259/5557dc8dc59d815eacda0306558d848f.jpg" alt="username" />
                   <div className="w-full pb-2">
                     <div className="flex justify-between">
-                      <span className="block ml-2 font-semibold text-gray-600">{element.email}</span>
+                      <span className="block ml-2 font-semibold text-gray-600">
+                        {
+                        element.firstUser._id  === user._id ? element.secondUser.email : element.firstUser.email 
+                        }
+                      </span>
                       <span className="block ml-2 text-sm text-gray-600">time</span>
                     </div>
                     <span className="block ml-2 text-sm text-gray-600">last message</span>

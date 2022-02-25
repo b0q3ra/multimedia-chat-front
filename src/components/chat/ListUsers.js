@@ -18,7 +18,7 @@ const ListUsers = ({setNewChat, setDisplayChats}) => {
         <ul className="overflow-auto h-[32rem]">
         <h2 className="my-2 mb-2 ml-2 text-lg text-gray-600">Users</h2>
 
-          {listOfUsers && listOfUsers.map((element, index) => {
+          {Array.isArray(listOfUsers) && listOfUsers.map((element, index) => {
             return (
               <li onClick={()=>createNewChat(element)} key={index}>
                 <a
